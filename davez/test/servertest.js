@@ -1,16 +1,27 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var expect = chai.expect;
-var myServer = require(__dirname + '/../server.js');
+var net = require('net');
+var fs = require('fs');
+require(__dirname + '/../server');
 
 chai.use(chaiHttp);
 
-describe('server.js', () => {
-  it('should respond with a 200 status', ()=> {
-    chai.request('localhost:3000').get('/')
-    .end(function (err, res) {
-      expect(err).to.be.null;
-      expect(res).to.have.status(200);
+describe('Test tcp server', function () {
+    it('request to be written to a file', function (done) {
+
+        // Set up a client and connect to port 31337 (or whatever port you use)
+        var client = net.connect({ port:3000 },
+            function() {
+                // Send some data
+                client.write('sending data to a file now');
+            });
+        client.on('data', function(data) {
+          fs.readFile(__dirname + '/../writtenfiles/' + data.toString() + '.txt', function(err, data2) {
+            expect(data2.toString()).to.eql('sending data to a file now');
+            client.end();
+            done();
+          });;
+        });
     });
-  });
 });

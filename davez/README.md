@@ -1,1 +1,15 @@
-This is the readme file for the server creator. I am able to get files to be created for each process, or each time i press enter when running the file, but the first file never contains any data and also the most recent created file will contain only the most recent stdin from the keyboard and each one before the most recent file will automatically be updated with anything added after it was created but not what was there before. It is mind boggling, and im sure im doing this in a weird way, but i cant seem to figure this out. and it really bothers me that the most recent created file will be empty
+This is my TCP server creator and tester README.md file.
+
+My server.js creates a server on Local port 3000.
+
+It notifies user of the port the server is on, in the console.
+
+It takes any request and displays it in the console of the node process.
+
+It writes the data request header and whatever is passed to a file.
+
+This file is unique, name based on current time sliced from new Date();.
+
+The test checks if the file created by server has data and;
+
+The test checks to see if data from server matches that from the test.
