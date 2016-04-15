@@ -13,8 +13,8 @@ function FileCreateObject() {
   this.fileName = counter();
 };
 
-const server = net.createServer((socket) => {
-var filetosend = counter();
+const server = module.exports = net.createServer((socket) => {
+  var filetosend = counter();
   var writeOut = fs.createWriteStream(__dirname + '/writtenfiles/' + filetosend +'.txt');
   socket.pipe(writeOut);
   socket.pipe(process.stdout);
